@@ -17,7 +17,10 @@ export default new DataSource({
 
   entities: [Tasks, Users, Attachment, Notification],
 
-  migrations: ['src/database/migrations/*.ts'],
+  migrations:
+    process.env.NODE_ENV === 'production'
+      ? ['dist/src/database/migrations/*.js']
+      : ['src/database/migrations/*.ts'],
 
   synchronize: false,
 });
