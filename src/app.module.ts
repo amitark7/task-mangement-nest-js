@@ -42,7 +42,7 @@ import configuration from './config/configuration';
           {
             name: 'default',
             ttl: 60000,
-            limit: process.env.NODE_ENV === 'test' ? 100 : 5,
+            limit: process.env.NODE_ENV === 'test' ? 100 : 100,
           },
         ],
 
@@ -114,10 +114,10 @@ import configuration from './config/configuration';
         entities: [Users, Tasks, Notification, Attachment],
 
         synchronize: configService.getOrThrow<boolean>('database.synchronize'),
-        logging:
-          configService.get<string>('NODE_ENV') === 'development'
-            ? ['query', 'error']
-            : ['error'],
+        // logging:
+        //   configService.get<string>('NODE_ENV') === 'development'
+        //     ? ['query', 'error']
+        //     : ['error'],
 
         extra: {
           connectionLimit: 10,
