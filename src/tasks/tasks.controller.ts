@@ -42,7 +42,7 @@ export class TasksController {
 
   @Throttle({
     default: {
-      limit: process.env.NODE_ENV === 'test' ? 100 : 5,
+      limit: process.env.NODE_ENV === 'test' ? 100 : 1000,
       ttl: 60000,
     },
   })
