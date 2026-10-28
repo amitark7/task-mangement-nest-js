@@ -14,6 +14,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateTaskDto {
   @ApiProperty({
     example: 'Learn NestJS',
+    required: false,
   })
   @IsString()
   @IsNotEmpty()
@@ -21,6 +22,7 @@ export class CreateTaskDto {
 
   @ApiProperty({
     example: 'Complete Swagger documentation',
+    required: false,
   })
   @IsString()
   @IsNotEmpty()
