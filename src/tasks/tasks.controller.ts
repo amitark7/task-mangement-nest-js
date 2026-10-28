@@ -22,7 +22,7 @@ import { RoleGuard } from 'src/guards/role.guard';
 import { JwtAuthGuardGuard } from 'src/guards/jwt-auth-guard.guard';
 import { Roles } from 'src/auth/decorators/roles/roles.decorator';
 import { UserRole } from 'src/users/user.entity';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import { CurrentUser } from 'src/common/decorators/current-user/current-user.decorator';
 import { RedisService } from 'src/redis/redis.service';
 import { Throttle } from '@nestjs/throttler';
@@ -47,6 +47,14 @@ export class TasksController {
     },
   })
   @Get()
+  @ApiQuery({ name: 'title', required: false })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'limit', required: false })
+  @ApiQuery({ name: 'search', required: false })
+  @ApiQuery({ name: 'status', required: false })
+  @ApiQuery({ name: 'priority', required: false })
+  @ApiQuery({ name: 'sortBy', required: false })
+  @ApiQuery({ name: 'order', required: false })
   async getTasks(
     @CurrentUser() user: any,
     @Query('title') title?: string,
@@ -100,6 +108,14 @@ export class TasksController {
   @Get('/admin/tasks')
   @UseGuards(RoleGuard)
   @Roles(UserRole.ADMIN)
+  @ApiQuery({ name: 'title', required: false })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'limit', required: false })
+  @ApiQuery({ name: 'search', required: false })
+  @ApiQuery({ name: 'status', required: false })
+  @ApiQuery({ name: 'priority', required: false })
+  @ApiQuery({ name: 'sortBy', required: false })
+  @ApiQuery({ name: 'order', required: false })
   getAllTasks(
     @Query('title') title?: string,
     @Query('page') page?: string,

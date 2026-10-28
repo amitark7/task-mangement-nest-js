@@ -17,7 +17,7 @@ import { RoleGuard } from 'src/guards/role.guard';
 import { JwtAuthGuardGuard } from 'src/guards/jwt-auth-guard.guard';
 import { Roles } from 'src/auth/decorators/roles/roles.decorator';
 import { UserRole } from './user.entity';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import { CurrentUser } from 'src/common/decorators/current-user/current-user.decorator';
 
 @ApiBearerAuth()
@@ -28,6 +28,7 @@ export class UsersController {
   @Get()
   @UseGuards(JwtAuthGuardGuard, RoleGuard)
   @Roles(UserRole.ADMIN)
+  @ApiQuery({ name: 'name', required: false })
   getUsers(@Query('name') name: string) {
     return this.userService.getUsers(name);
   }
